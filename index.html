@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Made by Zade Viggers. https://zade.viggers.net -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DVD</title>
+    <style>
+      /* CSS to do fancy things */
+      * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        font-family: sans-serif;
+      }
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        color-scheme: dark;
+      }
+      #container-marquee {
+        width: 100%;
+        height: 100%;
+      }
+      #reduced-motion-message {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        color: white;
+        background-color: black;
+        z-index: 10;
+      }
+
+      /*
+       * This is the colour change animation.
+       * Note for anyone else who tries this:
+       * Fully black or white images don't work - images need to have a colour in them for hue-rotate to have any effect.
+      */
+      img {
+        animation: 10s linear infinite rotate;
+      }
+      @keyframes rotate {
+        from {
+          filter: hue-rotate(0deg);
+        }
+        to {
+          filter: hue-rotate(360deg);
+        }
+      }
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        #reduced-motion-message {
+          display: block;
+        }
+        img {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span id="reduced-motion-message">
+      This page probably won't work because you have reduced motion enabled on
+      your device. Try turning it off quickly to see the magical colour changing
+      bouncing dvd logo with no js.
+    </span>
+    <!-- This marquee moves the image up & down -->
+    <marquee
+      direction="down"
+      behavior="alternate"
+      id="container-marquee"
+      vspace="0"
+    >
+      <!-- This one moves it left & right -->
+      <marquee behavior="alternate" hspace="0">
+        <img src="/dvd.png" alt="DVD Logo" width="239" height="107.5" />
+      </marquee>
+    </marquee>
+    <!-- Learn more about marquees: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee -->
+  </body>
+</html>
